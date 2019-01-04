@@ -79,7 +79,10 @@ def seis_ph_slp_cf(seismic,phase_slope,scaleopt,wl=256):
                                 sig = 4.5933 * pow(fs,-0.959)
                                 gs = np.exp(-0.5 * pow(((t - int(wl / 2)) / (sig * int(wl / 2))),2))
                                 hldr = gs * winseistr
-                                slp = get_fft_values(hldr,int(wl / 2))
+                                try:
+                                    slp=get_fft_values(hldr,int(wl/2))
+                                except:
+                                    slp=0
                                 phslptr[i] = slp
                             else:
                                 phslptr[i] = 0
@@ -126,7 +129,10 @@ def seis_ph_slp_dfct(seismic,phase_slope,scaleopt,wl=256):
                                 sig = 4.5933 * pow(domfreq,-0.959)
                                 gs = np.exp(-0.5 * pow(((t - int(wl / 2)) / (sig * int(wl / 2))),2))
                                 hldr = gs * winseistr
-                                slp = get_fft_values(hldr,int(wl / 2))
+                                try:
+                                    slp=get_fft_values(hldr,int(wl/2))
+                                except:
+                                    slp=0
                                 phslptr[i] = slp
                             else:
                                 phslptr[i] = 0
@@ -169,7 +175,10 @@ def seis_ph_slp_dfft(seismic,phase_slope,scaleopt,wl=256):
                                 sig = 4.5933 * pow(domfreq,-0.959)
                                 gs = np.exp(-0.5 * pow(((t - int(wl / 2)) / (sig * int(wl / 2))),2))
                                 hldr = gs * winseistr
-                                slp = get_fft_values(hldr,int(wl / 2))
+                                try:
+                                    slp=get_fft_values(hldr,int(wl/2))
+                                except:
+                                    slp=0
                                 phslptr[i] = slp
                             else:
                                 phslptr[i] = 0
@@ -218,4 +227,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
