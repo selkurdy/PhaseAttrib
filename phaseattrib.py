@@ -9,6 +9,7 @@ The resulting segy represents a continuous slope of the phase spectrum over the 
 
 It was observed that the resulting traces correlates well with gamma ray logs.
 
+Added strict=False for opening segy files for files that do  not have good headers
 """
 import os.path
 import argparse
@@ -67,8 +68,8 @@ def seis_ph_slp_cf(seismic,phase_slope,scaleopt,wl=256):
 
     copyfile(seismic,phase_slope)
     start_process = datetime.now()
-    with segyio.open(seismic, "r") as seis:
-        with segyio.open(phase_slope,"r+")as phslp:
+    with segyio.open(seismic, "r",strict=False) as seis:
+        with segyio.open(phase_slope,"r+",strict=False)as phslp:
             trnum = 0
             for seistr,phslptr in zip(seis.trace,phslp.trace):
                 if not np.all(seistr == 0):
@@ -117,8 +118,8 @@ def seis_ph_slp_dfct(seismic,phase_slope,scaleopt,wl=256):
         trsclmm = MinMaxScaler((scaleopt[1],scaleopt[2]))
     copyfile(seismic,phase_slope)
     start_process = datetime.now()
-    with segyio.open(seismic, "r") as seis:
-        with segyio.open(phase_slope,"r+")as phslp:
+    with segyio.open(seismic, "r",strict=False) as seis:
+        with segyio.open(phase_slope,"r+",strict=False)as phslp:
             trnum = 0
             for seistr,phslptr in zip(seis.trace,phslp.trace):
                 if not np.all(seistr == 0):
@@ -163,8 +164,8 @@ def seis_ph_slp_dfft(seismic,phase_slope,scaleopt,wl=256):
         trsclmm = MinMaxScaler((scaleopt[1],scaleopt[2]))
     copyfile(seismic,phase_slope)
     start_process = datetime.now()
-    with segyio.open(seismic, "r") as seis:
-        with segyio.open(phase_slope,"r+")as phslp:
+    with segyio.open(seismic, "r",strict=False) as seis:
+        with segyio.open(phase_slope,"r+",strict=False)as phslp:
             trnum = 0
             for seistr,phslptr in zip(seis.trace,phslp.trace):
                 if not np.all(seistr == 0):
